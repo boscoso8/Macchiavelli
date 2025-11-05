@@ -46,3 +46,9 @@ publish/
 *.tmp
 *.temp
 ~$*
+
+## Test Coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
