@@ -1,0 +1,49 @@
+namespace Macchiavelli;
+
+public class Deck
+{
+    private List<Card> cards;
+    private Random random;
+
+    public Deck(int numberOfDecks = 2)
+    {
+        cards = new List<Card>();
+        random = new Random();
+        
+        for (int d = 0; d < numberOfDecks; d++)
+        {
+            foreach (Suit suit in Enum.GetValues(typeof(Suit)))
+            {
+                foreach (Rank rank in Enum.GetValues(typeof(Rank)))
+                {
+                    cards.Add(new Card(suit, rank));
+                }
+            }
+        }
+    }
+
+    public void Shuffle()
+    {
+        int n = cards.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = random.Next(n + 1);
+            Card temp = cards[k];
+            cards[k] = cards[n];
+            cards[n] = temp;
+        }
+    }
+
+    public Card? Draw()
+    {
+        if (cards.Count == 0)
+            return null;
+
+        Card card = cards[0];
+        cards.RemoveAt(0);
+        return card;
+    }
+
+    public int Count => cards.Count;
+}
